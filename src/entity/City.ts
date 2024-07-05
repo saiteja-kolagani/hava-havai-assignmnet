@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { Country } from "./Country";
-import { Airport } from "./Airport";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Country } from './Country';
+import { Airport } from './Airport';
 
 @Entity()
 export class City {

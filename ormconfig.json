@@ -2,12 +2,23 @@
   "type": "mysql",
   "host": "localhost",
   "port": 3306,
-  "username": "your_username",
-  "password": "your_password",
-  "database": "your_database",
+  "username": "root",
+  "password": "root",
+  "database": "Database.xlsx",
   "synchronize": true,
   "logging": false,
-  "entities": ["src/entity/**/*.ts"],
-  "migrations": ["src/migration/**/*.ts"],
-  "subscribers": ["src/subscriber/**/*.ts"]
+  "entities": [
+    "src/entity/**/*.ts"
+  ],
+  "migrations": [
+    "src/migration/**/*.ts"
+  ],
+  "subscribers": [
+    "src/subscriber/**/*.ts"
+  ],
+  "cli": {
+    "entitiesDir": "src/entity",
+    "migrationsDir": "src/migration",
+    "subscribersDir": "src/subscriber"
+  }
 }

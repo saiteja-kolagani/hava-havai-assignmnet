@@ -1,9 +1,9 @@
-import "reflect-metadata";
-import { createConnection } from "typeorm";
-import express from "express";
-import { Airport } from "./entity/Airport";
-import { City } from "./entity/City";
-import { Country } from "./entity/Country";
+import 'reflect-metadata';
+import { createConnection } from 'typeorm';
+import express from 'express';
+import { Airport } from './entity/Airport';
+import { City } from './entity/City';
+import { Country } from './entity/Country';
 
 createConnection().then(async connection => {
   const app = express();
@@ -14,10 +14,10 @@ createConnection().then(async connection => {
     try {
       const airport = await connection
         .getRepository(Airport)
-        .createQueryBuilder("airport")
-        .leftJoinAndSelect("airport.city", "city")
-        .leftJoinAndSelect("city.country", "country")
-        .where("airport.iata_code = :iata_code", { iata_code })
+        .createQueryBuilder('airport')
+        .leftJoinAndSelect('airport.city', 'city')
+        .leftJoinAndSelect('city.country', 'country')
+        .where('airport.iata_code = :iata_code', { iata_code })
         .getOne();
 
       if (!airport) {
@@ -41,18 +41,20 @@ createConnection().then(async connection => {
               country_id: airport.city.country ? airport.city.country.id : null,
               is_active: airport.city.is_active,
               lat: airport.city.lat,
-              long: airport.city.long
+              long: airport.city.long,
             },
-            country: airport.city.country ? {
-              id: airport.city.country.id,
-              name: airport.city.country.name,
-              country_code_two: airport.city.country.country_code_two,
-              country_code_three: airport.city.country.country_code_three,
-              mobile_code: airport.city.country.mobile_code,
-              continent_id: airport.city.country.continent_id
-            } : null
-          }
-        }
+            country: airport.city.country
+              ? {
+                  id: airport.city.country.id,
+                  name: airport.city.country.name,
+                  country_code_two: airport.city.country.country_code_two,
+                  country_code_three: airport.city.country.country_code_three,
+                  mobile_code: airport.city.country.mobile_code,
+                  continent_id: airport.city.country.continent_id,
+                }
+              : null,
+          },
+        },
       };
 
       res.json(response);
@@ -65,5 +67,4 @@ createConnection().then(async connection => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
-
-}).catch(error => console.log(error));
+}).catch(error => console.log('Error connecting to the database:', error));

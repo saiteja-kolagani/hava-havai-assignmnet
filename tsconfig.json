@@ -2,15 +2,13 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "strictPropertyInitialization": false
-  }
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": ["src"]
 }
